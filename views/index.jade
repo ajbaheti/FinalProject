@@ -1,0 +1,41 @@
+extends layout
+
+block content
+	Div(class="gradientDiv")
+		h1(align="center") Welcome to Twitter Project
+		br
+		br
+		br
+		#searchdiv
+			form#searchform(name="search",method="post",action="../searchtext" onsubmit="return onFormSubmit();")
+				br
+				label(for='searchusertitle' class="label") Sentence:
+				input#searchusertitle(type="text", placeholder="Enter string to be searched in sentence", name="text")
+				label(class="label2") (This will search in Sentence field of documents)
+				br
+				br
+				label(for='searchdeaths' class="label1") Deaths:
+				input#searchdeaths(type="text", placeholder="Enter an integer to be searched in death count", name="count", onkeypress="return isNumber(event)")
+				input(class="radiocss" type="radio" name="operation" value="Greater Than" checked="checked")
+				| Greater &nbsp;&nbsp;&nbsp;
+				input(class="radiocss" type="radio" name="operation" value="Equal To")
+				| Equal &nbsp;&nbsp;&nbsp;
+				input(class="radiocss" type="radio" name="operation" value="Less Than")
+				| Lesser &nbsp;&nbsp;&nbsp;
+				br
+				br
+				button#btnTitleSubmit(type="submit") Search
+
+		br
+		br
+		#otherdiv
+			h4 About Database:
+			p This database reads sentences from the <b><i>South Asia Terrorism Portal</i></b> and quantify them. It contains deaths mentioned in a sentence and whether they were terrorists, civilians, or security forces. Database contains original sentences, state and district in which the deaths occurred, dates of the deaths, and more. #[a(href="http://www.crowdflower.com/data-for-everyone", target="_blank") click here] for link from where we downloaded the database.
+			p <b>Subject:</b> Knowledge Representation Technology
+			p <b>Under the guidance of:</b> Professor Michael McQuaid
+			p <b>Created by:</b>
+				ul
+					li Ashish Baheti
+					li Bhoomit Patel
+					li Khushbu Gala
+					li Siddhant S. Kadwadkar

@@ -1,0 +1,90 @@
+extends layout
+
+block content
+	Div(class="gradientDiv")
+		#topdiv
+			#homediv
+				a(href='../' class="home_link")
+			#resultdiv
+				label(class="resultLabel") Search Result
+		
+		#bottomdiv
+			p#searchStringPara(align="center" font-size="large") You searched for <span style="color:#EFE175;font-weight:bold">"#{searchString}"</span> and number of results retrieved are <span style="color:#EFE175;font-weight:bold">"#{result.length}"</span>
+			br
+			div(class="se-pre-con")
+
+			table#myTableId
+				thead
+					tr
+						th Select
+						th Sentence
+						th Event Id
+						th Deaths
+						th Report Date
+				tbody
+					each x, i in result
+						tr
+							td(style="width: 5%;")
+								input(type="radio",name="selection",value=x._unit_id,class="select_radio")
+							td(style="width: 65%;")= x.sentence
+							td(style="width: 15%;")= x.pid
+							td(style="width: 5%;")= x.total_number_of_people
+							td(style="width: 10%;")= x.report_date
+			br
+			if result.length != 0
+				button#btnViewDetails View
+				button#btnEditComment Edit
+
+			#divContentView
+				#detailInfo
+					h2 Details
+					p
+						Strong Unit Id:
+						|	<span id='_unit_id'></span>
+						br
+						Strong No of Civilians killed:
+						|	<span id='civilians'></span>
+						br
+						Strong No of Terrorists killed:
+						|	<span id='terrorists'></span>
+						br
+						Strong No of Security Forces killed:
+						|	<span id='securityGuards'></span>
+						br
+						Strong Total Deaths:
+						|	<span id='totalDeaths'></span>
+						br
+						Strong Event District:
+						|	<span id='district'></span>
+						br
+						Strong Event State:
+						|	<span id='state_full'></span>
+						br
+						Strong Sentence:
+						|	<span id='sentence'></span>
+						br
+						Strong Subject:
+						|	<span id='subject'></span>
+						br
+						Strong Event Id:
+						|	<span id='eventId'></span>
+						br
+						Strong Judgement Given At:
+						|	<span id='_last_judgment_at'></span>
+						br
+						Strong#cmntid Comment:
+						|	<span id='comment'></span>					
+					br
+					button#btnOverlayClose(class='b-close') Close
+
+			#divContentEdit
+				#commentOverlay
+					label#lblComment Enter Your Comment &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					br
+					br
+					input#addComment(type="text", placeholder="Enter your comment here")
+					br
+					br
+					br
+					button#btnOverlaySave Save
+					button#btnOverlayEditClose(class="b-close") Cancel
