@@ -10,11 +10,12 @@ router.get('/', function(req, res) {
 router.get('/getSingleRecordToView/:id',function(req,res){
 	var db = req.db;
 	var collection = db.get('terror');
+	console.log("collection terror in use......");
 	var idToFind = parseInt(req.params.id);
 	console.log(idToFind);
 	collection.find({"_unit_id":idToFind},function(err, docs){
 		if(err){
-
+			console.log(err);
 		}else{
 			console.log("No of documents retrieved for view: "+docs.length);
 			res.json(docs);
@@ -26,6 +27,7 @@ router.get('/getSingleRecordToView/:id',function(req,res){
 router.post('/saveComment',function(req,res){
 	var db = req.db;
 	var collection = db.get('terror');
+	console.log("collection terror in use......");
 	var idInInt = parseInt(req.body.uniqueId);
 	var query1 = {"_unit_id" : idInInt};
 	var query2 = {"$set" : {"comment":req.body.comment}};
@@ -39,7 +41,7 @@ router.post('/saveComment',function(req,res){
 	});
 });
 
-/* Get data of single user based on Id */
+/* google like functionaltiy code */
 /*router.post('/livesearch',function(req,res){
 	var db = req.db;
 	var collection = db.get('review');

@@ -6,11 +6,6 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Search' });
 });
 
-/* GET search by name page. */
-// router.get('/searchbyname', function(req, res) {
-//   res.render('searchbyname', { title: 'Name Search' });
-// });
-
 /* GET search by title page. */
 router.get('/searchbytext', function(req, res) {
   res.render('searchbytext', { title: 'Text Search' });
@@ -20,13 +15,14 @@ router.get('/searchbytext', function(req, res) {
 router.post('/searchtext', function(req, res) {
   var db = req.db;
   var collection = db.get('terror');
-  console.log("Fetching result based on text search...");
+
   var text = req.body.text;
   var count = req.body.count;
   var operation = req.body.operation;
   var query, search1;
   console.log("radio button value is "+ req.body.operation);
   console.log(text + "" + count);
+  
   if(text == ""){
     if(count != "" && operation == "Greater Than"){
       console.log("text is blank");
@@ -42,15 +38,18 @@ router.post('/searchtext', function(req, res) {
       search1 = "Count "+operation + " "+count;
     }
   }
+  
   if(count == ""){
     console.log("count is blank");
     query = {sentence: new RegExp(text, 'i')};
     search1 = "String "+text;
   }
+  
   if(text == "" && count == ""){
     query = {};
     search1 = "";
   }
+  
   if(text != "" && count != ""){
     if(operation == "Greater Than"){
       query = {sentence: new RegExp(text, 'i'), total_number_of_people: {$gt: parseInt(count)}};
